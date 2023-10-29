@@ -1,16 +1,22 @@
-
 <div class="card-content">
-<div class="card-img">
-    <img src={{destino.imageUrl}} alt="" />
-    <span><h4>{{destino.nombre}}</h4></span>
-</div>
-<div class="card-desc">
-    <h3>My Image</h3>
+  <div class="card-img">
+    <img src="{{ destino.imageUrl }}" alt="" />
+    <span
+      ><h4>{{ destino.nombre }}</h4></span
+    >
+  </div>
+  <div class="card-desc">
+    <h3>My Image {{ destino.nombre }}</h3>
     <p>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam,
-    voluptatum! Dolor quo, perspiciatis voluptas totam
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam,
+      voluptatum! Dolor quo, perspiciatis voluptas totam
     </p>
-    <a href="#" class="btn-card">Read</a>
+    <div class="row row-flex">
+      <a href="#" class="btn-card col-md-4" (click)="ir()">Ir!</a>
+      <div class="col-md-2"></div>
+      <span class="col-md-6" [style.display]="destino.isSelected() ? '' : 'none'"
+        >° Preferido °</span
+      >
+    </div>
+  </div>
 </div>
-</div>
-
