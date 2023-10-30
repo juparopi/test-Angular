@@ -17,13 +17,14 @@
         </li>
     </ul>
     <div class="row row-flex">
-      <a href="#" class="btn-card col-md-4" (click)="ir()">Ir!</a>
+      <a href="#" class="btn-card col-md-4" (click)="ir()">Marcar como preferido</a>
       <div class="col-md-2"></div>
       <span class="col-md-6" *ngIf="destino.isSelected()">
         <span ngNonBindable>
             {{° Preferido °}}
         </span>
       </span>
+      <a [routerLink]="['/destino']"> Ver Detalle</a>
     </div>
   </div>
 </div>

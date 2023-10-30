@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DestinoViaje } from '../models/destino-viaje.model';
-import { BulletDestinoComponent } from '../bullet-destino/bullet-destino.component';
+import { DestinosApiClient } from '../models/destinos-api-client.model';
 
 @Component({
   selector: 'app-lista-destinos',
@@ -8,25 +8,22 @@ import { BulletDestinoComponent } from '../bullet-destino/bullet-destino.compone
   styleUrls: ['./lista-destinos.component.css']
 })
 export class ListaDestinosComponent {
-  destinos: DestinoViaje[];
-  bulletsDestinos: DestinoViaje[];
-  constructor(){
-    this.destinos = [];
-    this.bulletsDestinos = [];
+  @Output() onItemAdded: EventEmitter<DestinoViaje>;
+
+  constructor( public destinosApiClient:DestinosApiClient){
+    this.onItemAdded = new EventEmitter();
   }
 
-  guardar(nombre:string, url:string):boolean{
+  agregado(d:DestinoViaje){
     //console.log(`nombre: ${nombre}, url: ${url}`);
-    let nuevo_destino = new DestinoViaje(nombre,url);
-    console.log(nuevo_destino);
-    this.destinos.push(nuevo_destino);
-    this.bulletsDestinos.push(nuevo_destino);
-    return false;
+    this.destinosApiClient.add(d);
+    this.onItemAdded.emit(d);
+
   }
 
-  elegido(d: DestinoViaje){
-    this.destinos.forEach( function (x) {x.setSelected(false);});
-    d.setSelected(true);
+  elegido(e: DestinoViaje){
+    this.destinosApiClient.getAll().forEach( x => x.setSelected(false));
+    e.setSelected(true);
   }
 
 }
